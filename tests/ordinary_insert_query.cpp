@@ -3,8 +3,8 @@
 #include "OrdinaryBloomFilter.hpp"
 
 namespace std {
-    template<> struct hash<bloom::OrdinaryBloomFilter<std::string>::HashParams> {
-        size_t operator()(bloom::OrdinaryBloomFilter<std::string>::HashParams const& s) const {
+    template<> struct hash<bloom::HashParams<std::string>> {
+        size_t operator()(bloom::HashParams<std::string> const& s) const {
             return std::hash<std::string>{}(s.a) ^ std::hash<uint8_t>{}(s.b);
         }
     };

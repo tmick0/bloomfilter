@@ -7,6 +7,15 @@
 namespace bloom {
 
 template <typename T>
+struct HashParams_S {
+    T a;
+    uint8_t b;
+};
+
+template <typename T>
+using HashParams = struct HashParams_S;
+
+template <typename T>
 class AbstractBloomFilter {
 
 public:
@@ -27,6 +36,8 @@ public:
     virtual void Insert(T const& o) = 0;
     virtual bool Query(T const& o) const = 0;
     virtual void Serialize(std::ostream &os) const = 0;
+
+    
 
 private:
     

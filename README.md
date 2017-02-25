@@ -32,7 +32,7 @@ These classes are templated, so you must specify the type of the object you are 
 
 This creates an ordinary BF with 4 hashes and a 32-bit array, capable of indexing strings.
 
-You must specialize `std::hash` for `OrdinaryBloomFilter<T>::HashParams` for each type `T` you wish to construct a BF for. The `HashParams` type is a structure consisting of the template parameter `T` and a `uint8_t`; the `uint8_t` serves as a salt, to allow multiple hashes to be generated for a single object (as per the semantics of a BF).
+You must specialize `std::hash` for `HashParams<T>` for each type `T` you wish to construct a BF for. The `HashParams` type is a structure consisting of the template parameter `T` and a `uint8_t`; the `uint8_t` serves as a salt, to allow multiple hashes to be generated for a single object (as per the semantics of a BF).
 
 It should suffice to simply xor the hashes of the `T` and the `uint8_t`. An example of how to specialize `std::hash` in this way can be found in `tests/ordinary_insert_query.cpp`.
 

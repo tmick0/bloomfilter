@@ -27,13 +27,13 @@ public:
     
     virtual void Insert(T const& o) {
         for(uint8_t i = 0; i < super::GetNumHashes(); i++){
-            m_bitarray[std::hash<HashParams>{}({o, i}) % super::GetNumBits()] = true;
+            m_bitarray[std::hash<HashParams<T>>{}({o, i}) % super::GetNumBits()] = true;
         }
     }
     
     virtual bool Query(T const& o) const {
         for(uint8_t i = 0; i < super::GetNumHashes(); i++){
-            if(!m_bitarray[std::hash<HashParams>{}({o, i}) % super::GetNumBits()]){
+            if(!m_bitarray[std::hash<HashParams<T>>{}({o, i}) % super::GetNumBits()]){
                 return false;
             }
         }
@@ -75,8 +75,6 @@ public:
         
         return r;
     }
-
-    typedef struct {T a; uint8_t b;} HashParams;
 
 private:
     
