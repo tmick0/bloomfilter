@@ -31,7 +31,7 @@ This creates an ordinary BF with 4 hashes and a 32-bit array, capable of indexin
 
 You must specialize `std::hash` for `HashParams<T>` for each type `T` you wish to construct a BF for. The `HashParams` type is a structure consisting of the template parameter `T` and a `uint8_t`; the `uint8_t` serves as a salt, to allow multiple hashes to be generated for a single object (as per the semantics of a BF).
 
-It should suffice to simply xor the hashes of the `T` and the `uint8_t`. An example of how to specialize `std::hash` in this way can be found in `tests/ordinary_insert_query.cpp`.
+A helper class implementing a 32-bit FNV-1 hash is given in `FnvHash.hpp`. An example of how to specialize `std::hash` using it can be found in `tests/ordinary_insert_query.cpp`.
 
 To insert an object `o` into the BF, call `bf.Insert(o)`, and to check for existence of an object, call `bf.Query(o)`. If using a CountingBloomFilter, you can remove items using `bf.Delete(o)`.
 
