@@ -3,12 +3,9 @@ A simple C++ library providing a few variations of Bloom filters.
 
 ## Description
 
-Currently, one type of Bloom filter is implemented: the OrdinaryBloomFilter. It supports the typical insert and query operations, as well as serialization and deserialization using a stream interface.
+Currently, ordinary and counting Bloom filters are supported. They both support the typical insert and query operations, as well as serialization and deserialization using a stream interface. The counting BF additionally supports a delete operation.
 
-Support is planned for two additional types:
-
-- Counting Bloom filter
-- Paired Bloom filter (as seen in [Mick et al.][1])
+Support is planned for the paired Bloom filter as seen in [Mick et al.][1].
 
 The following operations will also be supported:
 
@@ -36,7 +33,7 @@ You must specialize `std::hash` for `HashParams<T>` for each type `T` you wish t
 
 It should suffice to simply xor the hashes of the `T` and the `uint8_t`. An example of how to specialize `std::hash` in this way can be found in `tests/ordinary_insert_query.cpp`.
 
-To insert an object `o` into the BF, call `bf.Insert(o)`, and to check for existence of an object, call `bf.Query(o)`.
+To insert an object `o` into the BF, call `bf.Insert(o)`, and to check for existence of an object, call `bf.Query(o)`. If using a CountingBloomFilter, you can remove items using `bf.Delete(o)`.
 
 To serialize a BF into a `std::ostream` `os`, call `bf.Serialize(os)`. To deserialize a BF from a `std::istream` `is`, use the static function `Deserialize(is)` within the appropriate BF class.
 
