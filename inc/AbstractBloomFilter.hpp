@@ -3,6 +3,7 @@
 
 #include <cstdbool>
 #include <iostream>
+#include <functional>
 
 namespace bloom {
 
@@ -37,7 +38,11 @@ public:
     virtual bool Query(T const& o) const = 0;
     virtual void Serialize(std::ostream &os) const = 0;
 
+protected:
     
+    uint16_t ComputeHash(T const& o, uint8_t salt) const {
+        return std::hash<HashParams<T>>{}({o, salt}) % GetNumBits();
+    }
 
 private:
     

@@ -2,7 +2,6 @@
 #define OrdinaryBloomFilter_hpp
 
 #include <vector>
-#include <functional>
 
 #include "AbstractBloomFilter.hpp"
 
@@ -24,16 +23,15 @@ public:
         }
     }
     
-    
     virtual void Insert(T const& o) {
         for(uint8_t i = 0; i < super::GetNumHashes(); i++){
-            m_bitarray[std::hash<HashParams<T>>{}({o, i}) % super::GetNumBits()] = true;
+            m_bitarray[super::ComputeHash(o, i)] = true;
         }
     }
     
     virtual bool Query(T const& o) const {
         for(uint8_t i = 0; i < super::GetNumHashes(); i++){
-            if(!m_bitarray[std::hash<HashParams<T>>{}({o, i}) % super::GetNumBits()]){
+            if(!m_bitarray[super::ComputeHash(o, i)]){
                 return false;
             }
         }
