@@ -1,6 +1,6 @@
 #include <string>
 #include <iostream>
-#include "OrdinaryBloomFilter.hpp"
+#include "CountingBloomFilter.hpp"
 
 namespace std {
     template<> struct hash<bloom::HashParams<std::string>> {
@@ -15,7 +15,7 @@ int main(int argc, char *argv[]){
     std::string t1 = "Hello world!";
     std::string t2 = "foo bar baz";
     
-    bloom::OrdinaryBloomFilter<std::string> bf(4, 32);
+    bloom::CountingBloomFilter<std::string> bf(4, 32);
     
     bf.Insert(t1);
 
@@ -33,6 +33,21 @@ int main(int argc, char *argv[]){
     
     if(!bf.Query(t2)){
         std::cout << "Error: Query for second inserted element was false." << std::endl;
+        return 1;
+    }
+    
+    if(!bf.Delete(t2)){
+        std::cout << "Error: Failed to delete second inserted object." << std::endl;
+        return 1;
+    }
+    
+    if(bf.Query(t2)){
+        std::cout << "Error: Query for deleted object was true." << std::endl;
+        return 1;
+    }
+    
+    if(!bf.Query(t1)){
+        std::cout << "Error: Query for non-deleted object was false." << std::endl;
         return 1;
     }
     
