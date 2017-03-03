@@ -3,11 +3,15 @@ A simple C++ library providing a few variations of Bloom filters.
 
 ## Description
 
-Currently, ordinary and counting Bloom filters are supported. They both support the typical insert and query operations, as well as serialization and deserialization using a stream interface. The counting BF additionally supports a delete operation.
+Three types of Bloom filters are supported:
 
-Support is planned for the paired Bloom filter as seen in [Mick et al.][1].
+- Ordinary BFs
+- Counting BFs
+- Paired BFs (as seen in [Mick et al.][1])
 
-The following operations will also be supported:
+All types support the typical insert and query operations, as well as serialization and deserialization using a stream interface. The counting and paired BFs additionally support a delete operation.
+
+The following operations on BFs are also planned:
 
 - Compressing a counting BF into an ordinary BF
 - Compressing an ordinary BF using the halving method (as seen in [Wang et al.][2])
@@ -33,7 +37,7 @@ You must specialize `std::hash` for `HashParams<T>` for each type `T` you wish t
 
 A helper class implementing a 32-bit FNV-1 hash is given in `FnvHash.hpp`. An example of how to specialize `std::hash` using it can be found in `tests/ordinary_insert_query.cpp`.
 
-To insert an object `o` into the BF, call `bf.Insert(o)`, and to check for existence of an object, call `bf.Query(o)`. If using a CountingBloomFilter, you can remove items using `bf.Delete(o)`.
+To insert an object `o` into the BF, call `bf.Insert(o)`, and to check for existence of an object, call `bf.Query(o)`. If using a CountingBloomFilter or PairedBloomFilter, you can remove items using `bf.Delete(o)`.
 
 To serialize a BF into a `std::ostream` `os`, call `bf.Serialize(os)`. To deserialize a BF from a `std::istream` `is`, use the static function `Deserialize(is)` within the appropriate BF class.
 
