@@ -90,7 +90,7 @@ public:
 
 private:
     
-    typedef AbstractBloomFilter<T> super;
+    typedef AbstractDeletableBloomFilter<T> super;
     
     std::vector<bool> m_bitarray;
     
