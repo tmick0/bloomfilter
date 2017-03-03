@@ -5,7 +5,7 @@ TESTS=$(TESTSRC:.cpp=)
 TESTRUN=$(addprefix run_, $(notdir $(TESTS)))
 TESTVAL=$(addprefix val_, $(notdir $(TESTS)))
 
-.PHONY: run_tests all clean
+.PHONY: run_tests all clean docs
 
 all: run_tests
 
@@ -26,6 +26,10 @@ val_%: tests/%
 tests/%: tests/%.cpp $(HEADERS)
 	$(CXX) $(CFLAGS) -o $@ $<
 
+docs:
+	mkdir -p docs
+	doxygen Doxyfile
+
 clean:
-	rm -rf $(TESTS)
+	rm -rf $(TESTS) docs
 
