@@ -1,5 +1,5 @@
-#ifndef OrdinaryBloomFilter_hpp
-#define OrdinaryBloomFilter_hpp
+#ifndef CountingBloomFilter_hpp
+#define CountingBloomFilter_hpp
 
 #include <vector>
 
