@@ -47,5 +47,7 @@ To insert an object `o` into the BF, call `bf.Insert(o)`, and to check for exist
 
 To serialize a BF into a `std::ostream` `os`, call `bf.Serialize(os)`. To deserialize a BF from a `std::istream` `is`, use the static function `Deserialize(is)` within the appropriate BF class.
 
+For information about the other operations, refer to the Doxygen documentation or read the comments in the code.
+
 [1]: http://dl.acm.org/citation.cfm?id=2984375 "MuNCC: Multi-hop Neighborhood Collaborative Caching in Information Centric Networks"
 [2]: http://ieeexplore.ieee.org/document/6193507/ "Advertising cached contents in the control plane; Necessity and feasibility"

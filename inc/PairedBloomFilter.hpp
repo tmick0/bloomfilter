@@ -38,6 +38,12 @@ public:
         }
     }
     
+    /** Queries whether an object is indexed by this Bloom filter. Both false
+     *  negatives and false positives are possible.
+     *  
+     *  @param  o Object to query
+     *  @return true if object is indexed, false if the object is not indexed.
+     */
     virtual bool Query(T const& o) const {
         for(uint8_t i = 0; i < super::GetNumHashes(); i++){
             if(!m_bitarray[super::ComputeHash(o, i)]){
