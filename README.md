@@ -20,8 +20,7 @@ There are also a few operations supported by particular types:
 
 - Counting and paired BFs also support a Delete operation
 - Counting BFs support conversion into ordinary BFs
-
-Support is planned for compressing an ordinary BF using the halving method (as seen in [Wang et al.][2]).
+- Ordinary BFs can be compressed using the halving method (as seen in [Wang et al.][2])
 
 A few additional helper mechanisms may eventually be implemented:
 
