@@ -1,3 +1,6 @@
+#ifndef FnvHash_hpp
+#define FnvHash_hpp
+
 #include <cstdint>
 
 namespace bloom {
@@ -48,3 +51,4 @@ private:
 
 }
 
+#endif
