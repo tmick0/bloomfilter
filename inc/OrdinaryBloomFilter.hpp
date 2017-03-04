@@ -93,6 +93,24 @@ public:
         return r;
     }
     
+    /** Halves this OrdinaryBloomFilter, reducing its size at the cost of an
+     *  increased false positive ratio.
+     *
+     *  @return A new OrdinaryBloomFilter with half as many bits.
+     */
+    OrdinaryBloomFilter<T> Compress() const {
+        uint16_t oldNumBits = super::GetNumBits();
+        uint16_t newNumBits = oldNumBits / 2;
+        
+        OrdinaryBloomFilter<T> res(super::GetNumHashes(), newNumBits);
+        
+        for(unsigned i = 0; i < oldNumBits; i++){
+            res.m_bitarray[i % newNumBits] = res.m_bitarray[i % newNumBits] | m_bitarray[i];
+        }
+        
+        return res;
+    }
+    
     friend OrdinaryBloomFilter<T> CountingBloomFilter<T>::ToOrdinaryBloomFilter() const;
 
 private:
