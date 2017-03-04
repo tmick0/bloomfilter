@@ -2,8 +2,15 @@
 #define OrdinaryBloomFilter_hpp
 
 #include <vector>
-
 #include "AbstractBloomFilter.hpp"
+
+// forward decl
+namespace bloom {
+    template <typename T>
+    class OrdinaryBloomFilter;
+}
+
+#include "CountingBloomFilter.hpp"
 
 namespace bloom {
 
@@ -85,6 +92,8 @@ public:
         
         return r;
     }
+    
+    friend OrdinaryBloomFilter<T> CountingBloomFilter<T>::ToOrdinaryBloomFilter() const;
 
 private:
     

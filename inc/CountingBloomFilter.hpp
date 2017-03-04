@@ -2,8 +2,15 @@
 #define CountingBloomFilter_hpp
 
 #include <vector>
-
 #include "AbstractDeletableBloomFilter.hpp"
+
+// forward decl
+namespace bloom {
+    template <typename T>
+    class CountingBloomFilter;
+}
+
+#include "OrdinaryBloomFilter.hpp"
 
 namespace bloom {
 
@@ -92,7 +99,20 @@ public:
         
         return r;
     }
-
+    
+    /** Returns an ordinary BF with the same set represented by this counting
+     *  BF.
+     *
+     *  @return The new OrdinaryBloomFilter
+     */
+    OrdinaryBloomFilter<T> ToOrdinaryBloomFilter() const {
+        OrdinaryBloomFilter<T> res(super::GetNumHashes(), super::GetNumBits());
+        for(int i = 0; i < super::GetNumBits(); i++){
+            res.m_bitarray[i] = m_bitarray[i] > 0;
+        }
+        return res;
+    }
+    
 private:
     
     typedef AbstractDeletableBloomFilter<T> super;
