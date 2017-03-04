@@ -9,12 +9,19 @@ Three types of Bloom filters are supported:
 - Counting BFs
 - Paired BFs (as seen in [Mick et al.][1])
 
-All types support the typical insert and query operations, as well as serialization and deserialization using a stream interface. The counting and paired BFs additionally support a delete operation.
+The following operations are supported on all types:
 
-The following operations on BFs are also planned:
+- Insert
+- Query
+- Serialize
+- Deserialize
 
-- Compressing a counting BF into an ordinary BF
-- Compressing an ordinary BF using the halving method (as seen in [Wang et al.][2])
+There are also a few operations supported by particular types:
+
+- Counting and paired BFs also support a Delete operation
+- Counting BFs support conversion into ordinary BFs
+
+Support is planned for compressing an ordinary BF using the halving method (as seen in [Wang et al.][2]).
 
 A few additional helper mechanisms may eventually be implemented:
 
