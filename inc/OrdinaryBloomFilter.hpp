@@ -7,12 +7,18 @@
 
 namespace bloom {
 
+/** An ordinary Bloom filter.
+ *
+ *  @param T Contained type being indexed
+ */
 template <typename T>
 class OrdinaryBloomFilter : public AbstractBloomFilter<T> {
 
 public:
 
-    
+    /** Constructor
+     *  @see AbstractBloomFilter::AbstractBloomFilter
+     */
     explicit
     OrdinaryBloomFilter(uint8_t numHashes, uint16_t numBits)
     : AbstractBloomFilter<T>(numHashes, numBits)
@@ -54,6 +60,12 @@ public:
         }
     }
     
+    /** Create an OrdinaryBloomFilter from the content of a binary input
+     * stream. No validation is performed.
+     *
+     * @param  is Input stream to read from
+     * @return Deserialized OrdinaryBloomFilter
+     */
     static OrdinaryBloomFilter<T> Deserialize(std::istream &is){
         uint8_t numHashes;
         uint16_t numBits;

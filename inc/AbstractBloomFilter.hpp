@@ -61,7 +61,7 @@ public:
      *  The value does not reflect the actual storage size of the BF, but rather
      *  is related to the false-positive rate of the BF.
      *  
-     * @see     AbstractBloomFilter
+     * @see     AbstractBloomFilter::AbstractBloomFilter
      * @return  Number of bits, in terms of an ordinary Bloom filter
      */
     uint16_t GetNumBits() const {

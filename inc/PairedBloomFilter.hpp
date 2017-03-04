@@ -6,12 +6,22 @@
 
 namespace bloom {
 
+/** A paired Bloom filter. Maintains two ordinary Bloom filters internally. When
+ *  an item is inserted, it is inserted into a "positive" Bloom filter. When an
+ *  item is deleted, it is inserted into a "negative" Bloom filter. An queried
+ *  item is considered present if the query on the positive BF is positive and
+ *  the query on the negative BF is negative.
+ *
+ *  @param T Contained type being indexed
+ */
 template <typename T>
 class PairedBloomFilter : public AbstractDeletableBloomFilter<T> {
 
 public:
 
-    
+    /** Constructor
+     *  @see AbstractBloomFilter::AbstractBloomFilter
+     */
     explicit
     PairedBloomFilter(uint8_t numHashes, uint16_t numBits)
     : AbstractDeletableBloomFilter<T>(numHashes, numBits)
@@ -68,6 +78,12 @@ public:
         }
     }
     
+    /** Create a PairedBloomFilter from the content of a binary input
+     * stream. No validation is performed.
+     *
+     * @param  is Input stream to read from
+     * @return Deserialized PairedBloomFilter
+     */
     static PairedBloomFilter<T> Deserialize(std::istream &is){
         uint8_t numHashes;
         uint16_t numBits;

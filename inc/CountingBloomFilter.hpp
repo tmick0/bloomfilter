@@ -7,12 +7,20 @@
 
 namespace bloom {
 
+/** A counting Bloom filter. Instead of an array of bits, maintains an array of
+ *  bytes. Each byte is incremented for an added item, or decremented for a
+ *  deleted item, thereby supporting a delete operation.
+ *
+ *  @param T Contained type being indexed
+ */
 template <typename T>
 class CountingBloomFilter : public AbstractDeletableBloomFilter<T> {
 
 public:
 
-    
+    /** Constructor
+     *  @see AbstractBloomFilter::AbstractBloomFilter
+     */
     explicit
     CountingBloomFilter(uint8_t numHashes, uint16_t numBits)
     : AbstractDeletableBloomFilter<T>(numHashes, numBits)
@@ -61,6 +69,12 @@ public:
         }
     }
     
+    /** Create a CountingBloomFilter from the content of a binary input
+     * stream. No validation is performed.
+     *
+     * @param  is Input stream to read from
+     * @return Deserialized CountingBloomFilter
+     */
     static CountingBloomFilter<T> Deserialize(std::istream &is){
         uint8_t numHashes;
         uint16_t numBits;
