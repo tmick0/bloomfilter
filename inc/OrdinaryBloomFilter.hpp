@@ -11,6 +11,7 @@ namespace bloom {
 }
 
 #include "CountingBloomFilter.hpp"
+#include "PairedBloomFilter.hpp"
 
 namespace bloom {
 
@@ -108,6 +109,20 @@ public:
             res.m_bitarray[i % newNumBits] = res.m_bitarray[i % newNumBits] | m_bitarray[i];
         }
         
+        return res;
+    }
+    
+    /** Creates a PairedBloomFilter with an empty negative set, and a positive
+     *  set given by this OrdinaryBloomFilter.
+     *
+     *  @return A new PairedBloomFilter
+     */
+    PairedBloomFilter<T> ToPairedBloomFilter() const {
+        uint16_t numBits = super::GetNumBits();
+        PairedBloomFilter<T> res(super::GetNumHashes(), numBits);
+        for(unsigned i = 0; i < numBits; i++){
+            res.m_bitarray[i] = m_bitarray[i];
+        }
         return res;
     }
     

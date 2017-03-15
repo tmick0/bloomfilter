@@ -2,6 +2,13 @@
 #define PairedBloomFilter_hpp
 
 #include "AbstractDeletableBloomFilter.hpp"
+
+// forward decl
+namespace bloom {
+    template <typename T>
+    class PairedBloomFilter;
+}
+
 #include "OrdinaryBloomFilter.hpp"
 
 namespace bloom {
@@ -109,6 +116,8 @@ public:
         
         return r;
     }
+    
+    friend PairedBloomFilter<T> OrdinaryBloomFilter<T>::ToPairedBloomFilter() const;
 
 private:
     
