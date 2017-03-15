@@ -19,7 +19,9 @@ The following operations are supported on all types:
 There are also a few operations supported by particular types:
 
 - Counting and paired BFs also support a Delete operation
+- Ordinary and paired BFs also support a Union operation
 - Counting BFs support conversion into ordinary BFs
+- Ordinary BFs support conversion into paired BFs
 - Ordinary BFs can be compressed using the halving method (as seen in [Wang et al.][2])
 
 A few additional helper mechanisms may eventually be implemented:
@@ -27,7 +29,7 @@ A few additional helper mechanisms may eventually be implemented:
 - A helper to compute the optimal BF parameters given the number of content objects to be indexed
 - Helpers to compute the probabilities of false positives for queries on existing populated BFs
 
-Proper (doxygen) documentation is coming soon.
+Doxygen documentation can be compiled with `make docs`.
 
 ## Usage
 
