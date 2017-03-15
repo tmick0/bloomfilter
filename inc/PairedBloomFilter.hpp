@@ -92,10 +92,10 @@ public:
     }
     
     /** Create a PairedBloomFilter from the content of a binary input
-     * stream. No validation is performed.
+     *  stream. No validation is performed.
      *
-     * @param  is Input stream to read from
-     * @return Deserialized PairedBloomFilter
+     *  @param  is Input stream to read from
+     *  @return Deserialized PairedBloomFilter
      */
     static PairedBloomFilter<T> Deserialize(std::istream &is){
         uint8_t numHashes;
