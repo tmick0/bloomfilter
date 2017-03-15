@@ -126,6 +126,18 @@ public:
         return res;
     }
     
+    /** Update this Bloom filter by adding the contents of a second one.
+     *  The BFs will be combined by logical OR, thus new false positives may be
+     *  introduced.
+     *
+     *  @param other BF to combine into this one
+     */
+    void Union(OrdinaryBloomFilter<T> const& other){
+        for(unsigned i = 0; i < super::GetNumBits(); i++){
+            m_bitarray[i] = m_bitarray[i] | other.m_bitarray[i];
+        }
+    }
+    
     friend OrdinaryBloomFilter<T> CountingBloomFilter<T>::ToOrdinaryBloomFilter() const;
 
 private:

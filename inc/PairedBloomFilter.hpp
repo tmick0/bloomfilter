@@ -117,6 +117,23 @@ public:
         return r;
     }
     
+    /** Update this Bloom filter by adding the contents of a second one.
+     *  The positive BFs will be combined by logical OR, while the negative BFs
+     *  will be combined by logical AND. Thus, new false positives may be
+     *  introduced, but new false negatives will not be.
+     *
+     *  @param other new BF to combine into this one
+     */
+    void Union(PairedBloomFilter<T> const& other){
+        uint16_t numBits = super::GetNumBits();
+        for(unsigned i = 0; i < numBits; i++){
+            m_bitarray[i] = m_bitarray[i] | other.m_bitarray[i];
+        }
+        for(unsigned i = 0; i < numBits; i++){
+            m_bitarray[numBits + i] = m_bitarray[numBits + i] & other.m_bitarray[numBits + i];
+        }
+    }
+    
     friend PairedBloomFilter<T> OrdinaryBloomFilter<T>::ToPairedBloomFilter() const;
 
 private:
