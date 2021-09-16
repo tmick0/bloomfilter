@@ -23,7 +23,7 @@ struct HashParams_S {
  *  @param T Contained type being hashed
  */
 template <typename T>
-using HashParams = struct HashParams_S;
+using HashParams = HashParams_S<T>;
 
 /** Abstract class from which all BloomFilter types inherit. Contains common
  *  functionality for constructors, getters, and hashing and defines interface
