@@ -8,22 +8,14 @@
 namespace bloom {
 
 /** Container type for a hashable object and a salt
- *  Do not use this struct directly, but rather its alias bloom::HashParams<T>.
  *
  *  @param T Contained type being hashed
  */
 template <typename T>
-struct HashParams_S {
+struct HashParams {
     T a;        //!< Object to hash
     uint8_t b;  //!< 8-bit salt
 };
-
-/** Container type for a hashable object and a salt
- *
- *  @param T Contained type being hashed
- */
-template <typename T>
-using HashParams = struct HashParams_S;
 
 /** Abstract class from which all BloomFilter types inherit. Contains common
  *  functionality for constructors, getters, and hashing and defines interface
